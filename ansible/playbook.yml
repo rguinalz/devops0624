@@ -1,0 +1,19 @@
+<<<<<<< HEAD
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Instalação do Git
+      ansible.builtin.apt:
+        name: git
+        state: present
+=======
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Instalação do Git
+      ansible.builtin.apt:
+        name: git
+        state: present
+>>>>>>> d5c6e8f (Primeiro Commit VM Controle)
