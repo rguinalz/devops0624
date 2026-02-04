@@ -11,12 +11,13 @@
           - ca-certificates
           - curl
           - gnupg2
+          - openjdk-17-jdk
           - software-properties-common
         state: present
 
     - name: Adicionar chave GPG do Jenkins
       apt_key:
-        url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+        url: https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key
         state: present
 
     - name: Adicionar repositório do Jenkins
