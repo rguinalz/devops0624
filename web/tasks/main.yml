@@ -1,10 +1,5 @@
 ---
-- hosts: web
-  become: yes
-  vars_files:
-    - vars/default.yml
-  gather_facts: true
-  tasks:
+# tasks file for web
     - name: 'Instalação de pacotes webserver'
       become: yes
       apt:
@@ -44,15 +39,15 @@
         replace: '172.17.177.102'
     - name: 'Criando virtual host para pagina express.asf.com'
       template:
-        src: "files/express.conf.j2"
+        src: "/express.conf.j2"
         dest: "/etc/apache2/sites-available/{{ http_conf }}"
     - name: 'Controle de Diretorio Virtual HOst'
       template:
-        src: "files/direxpress.conf.j2"
+        src: "/direxpress.conf.j2"
         dest: "/etc/apache2/conf-available/direxpress.conf"
     - name: 'Entrada DNS arquivo /etc/hosts'
       template:
-        src: "files/hostsweb.conf.j2"
+        src: "/hostsweb.conf.j2"
         dest: "/etc/hosts"
     - name: 'Habilitar Site'
       shell: /usr/sbin/a2ensite {{ http_conf }}
@@ -66,12 +61,3 @@
         name: php
       notify: Restart Apache
   
-  handlers:
-    - name: Reload Apache
-      service:
-        name: apache2
-        state: reloaded
-    - name: Restart Apache
-      service:
-        name: apache2
-        state: restarted    

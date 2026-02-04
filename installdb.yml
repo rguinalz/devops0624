@@ -33,14 +33,13 @@
         name: backup
         target: /tmp/backup.sql
     - name: 'Criacao de Usuário Express no Mysql'
-      mysql_user :
+      mysql_user:
         host: '%'
         login_unix_socket: /run/mysqld/mysqld.sock
         name: express
         password: 'AllSafe0!'
         priv: 'backup.*:ALL'
         state: present
-        column_case_sensitive: false
     - name: 'Substituir bind do mysql'
       replace:
         path: /etc/mysql/mariadb.conf.d/50-server.cnf
