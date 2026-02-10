@@ -3,7 +3,7 @@ FROM debian:11-slim
 LABEL maintainer="Ronaldo Filho ronaldo@asf.com"
 ENV PORT=80
 
-RUN apt uptade && apt install apache2 php php7.4-mysql -y \
+RUN apt update && apt install apache2 php php7.4-mysql -y \
     && a2enmod php7.4 # ou a versão do PHP desejada
 
 # Remova o arquivo index.html padrão
