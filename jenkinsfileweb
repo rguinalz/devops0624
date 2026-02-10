@@ -2,16 +2,16 @@ pipeline {
     agent any
 
     stages {
-	stage('Executar playbook Ansible') {
-	   steps {
-	      with(credentialsId: 'ssh_passphrase', variable: 'ANSIBLE_PASSPHRASE')
-	      
-       ]){
-	      sh '''
-		  eval $(ssh-agent -s)
-		  echo "ANSIBLE_PASSPHRASE" | ssh-add /var/ssh/key/id_rsa
-		  ansible-playbook -i ansible/hosts ansible/installweb.yml
-		 ''' 
+		stage('Executar playbook Ansible') {
+			steps {
+				withCredentialsId:([
+					string(credentialsId: 'ssh_passphrase', variable: 'ANSIBLE_PASSPHRASE')
+				])  {
+					sh '''
+						eval $(ssh-agent -s)
+						echo "$ANSIBLE_PASSPHRASE" | ssh-add /var/ssh/key/id_rsa
+						ansible-playbook -i ansible/hosts ansible/installweb.yml
+					   ''' 
 				}
 			}
 		}
